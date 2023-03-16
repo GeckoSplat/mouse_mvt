@@ -2,6 +2,9 @@ pub mod jiggle_mouse;
 pub mod looping;
 use crate::looping::looping;
 
+// Runs in background once launched in terminal,
+// use hotkeys to operate.
+
 fn main() {
     println!(
         "\nUp and running my Leige !\n
@@ -15,6 +18,3 @@ fn main() {
 
     println!("\nExiting Program. Goodbye, my Leige");
 }
-
-//TODO
-//Structs for DRY?

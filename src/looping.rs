@@ -9,7 +9,8 @@ pub fn looping() {
         let mut jiggle_counter = 1;
         let device_state = DeviceState::new();
         let keys: Vec<Keycode> = device_state.get_keys();
-        let sleep_duration = 2;
+        // Time between jiggles is set here in seconds:
+        let sleep_duration = 5;
 
         if keys.contains(&Keycode::Numpad4) {
             println!("\nJiggler running, timer started :");
