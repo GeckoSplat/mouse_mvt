@@ -7,7 +7,7 @@ use crate::looping::looping;
 
 fn main() {
     println!(
-        "\nUp and running my Leige !\n
+        "\nUp and running in background my Leige !\n
     Press\n 
     Numpad 4 to jiggle\n
     Numpad 5 to pause\n

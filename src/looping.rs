@@ -10,7 +10,7 @@ pub fn looping() {
         let device_state = DeviceState::new();
         let keys: Vec<Keycode> = device_state.get_keys();
         // Time between jiggles is set here in seconds:
-        let sleep_duration = 5;
+        let sleep_duration = 1;
 
         if keys.contains(&Keycode::Numpad4) {
             println!("\nJiggler running, timer started :");
@@ -25,7 +25,7 @@ pub fn looping() {
                 if exit_key.contains(&Keycode::Numpad5) {
                     let elapsed_time = now.elapsed();
                     println!(
-                        "\nI jiggled for {} seconds !\nPaused jiggling",
+                        "\nI jiggled for {} seconds !\nPaused jiggling\n\nRunning in background....",
                         elapsed_time.as_secs()
                     );
                     continue 'outerL;
@@ -33,7 +33,6 @@ pub fn looping() {
             }
         }
         if keys.contains(&Keycode::Numpad6) {
-            println!("\nExiting main loop");
             break;
         }
     }
