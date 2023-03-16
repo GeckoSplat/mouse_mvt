@@ -1,0 +1,8 @@
+[package]
+name = "mouse_mvt"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+device_query = "1.1.2"
+mouse-rs = "0.4.2"
