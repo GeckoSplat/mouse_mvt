@@ -14,6 +14,4 @@ fn main() {
     );
 
     looping();
-
-    println!("\nExiting Program. Goodbye, my Leige");
 }
