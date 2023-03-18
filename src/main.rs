@@ -1,6 +1,7 @@
+use crate::looping::looping;
+
 pub mod jiggle_mouse;
 pub mod looping;
-use crate::looping::looping;
 
 // Runs in background once launched in terminal,
 // use hotkeys to operate.
