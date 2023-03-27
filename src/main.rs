@@ -10,7 +10,6 @@ async fn main() {
     Press and Hold Numpad 5 to pause.\n
     Press Numpad 6 to Exit.\n"
     );
-    
-    looping().await;
-    
+
+    looping();
 }

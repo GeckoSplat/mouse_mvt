@@ -1,13 +1,11 @@
 use crate::jiggle_mouse::jiggle_mouse;
 use device_query::keymap::Keycode;
 use device_query::{DeviceQuery, DeviceState};
-use std::process::exit;
-use std::time::{Duration, Instant};
 use std::sync::mpsc;
 use std::thread;
+use std::time::{Duration, Instant};
 
-pub async fn looping() {
-    println!("started fn looping");
+pub fn looping() {
     'outerL: loop {
         let (sender, receiver) = mpsc::channel::<String>();
         let mut jiggle_counter = 1;
@@ -16,28 +14,27 @@ pub async fn looping() {
 
         if keys.contains(&Keycode::Numpad6) {
             println!("\nExiting Program. Goodbye, my Leige.");
-            exit(0x0100);
+            break;
         }
 
         if keys.contains(&Keycode::Numpad4) {
-            println!("\nJiggler running, timer started :");
             let now = Instant::now();
+            println!("\nJiggler running, timer started :\n");
+
             'inner: loop {
-                println!("inner loop started");
+                println!("jiggle loop is looping...");
                 loop {
-                    thread::sleep(Duration::from_secs(2));
-                    let now = Instant::now();
                     let device_state = DeviceState::new();
                     let exit_key: Vec<Keycode> = device_state.get_keys();
                     let sender2 = sender.clone();
 
                     thread::spawn(move || {
-                        let msg = format!("hit me !");
-                        
-                        
-                        sender2.send(msg).unwrap(); //.expect("oh no true");
+                        let msg = format!("you caught me !");
+
+                        sender2.send(msg).expect("arrrgg!, sender gone wrong");
                         drop(sender2);
                     });
+                    thread::sleep(Duration::from_secs(1));
 
                     if exit_key.contains(&Keycode::Numpad5) {
                         let elapsed_time = now.elapsed();
@@ -49,10 +46,10 @@ pub async fn looping() {
                     }
 
                     while let Ok(msg) = receiver.recv() {
-                        println!("while let active {msg:?}");
+                        println!("thread active {msg:?}");
 
                         jiggle_mouse();
-                        println!("jiggled {} times.", jiggle_counter);
+                        println!("\njiggled {} times.\n", jiggle_counter);
                         jiggle_counter += 1;
 
                         continue 'inner;
@@ -62,6 +59,3 @@ pub async fn looping() {
         }
     }
 }
-
-
-// TODO - work out waits and if order correct . put timer in.
