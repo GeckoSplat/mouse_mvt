@@ -3,8 +3,8 @@ use mouse_rs::Mouse;
 use std::{thread, time::Duration};
 
 pub fn jiggle_mouse() {
-    let sleep_duration = 1;
-    let sleep_duration_nanos = 300000000;
+    let sleep_duration = 2;
+    let sleep_duration_nanos = 250000000;
     let mouse = Mouse::new();
     // amount of movement set here in pixels
     let first_position = mouse.get_position().unwrap();

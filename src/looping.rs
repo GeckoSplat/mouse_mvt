@@ -1,7 +1,7 @@
 use crate::jiggle_mouse::jiggle_mouse;
 use device_query::keymap::Keycode;
 use device_query::{DeviceQuery, DeviceState};
-use std::time::{Duration, Instant};
+use std::time::Instant;
 use std::sync::mpsc;
 use std::thread;
 
@@ -37,7 +37,6 @@ pub fn looping() {
                         sender2.send(msg).expect("arrrgg!, sender gone wrong"); 
                         drop(sender2);
                     });
-                    thread::sleep(Duration::from_secs(1));
 
                     if exit_key.contains(&Keycode::Numpad5) {
                         let elapsed_time = now.elapsed();
