@@ -1,12 +1,6 @@
 use crate::looping::looping;
-use crate::looping::key5;
 pub mod jiggle_mouse;
 pub mod looping;
-use tokio::task;
-
-// Runs in background once launched in terminal,
-// use hotkeys to operate.
-
 
 #[tokio::main]
 async fn main() {
@@ -16,8 +10,7 @@ async fn main() {
     Press and Hold Numpad 5 to pause.\n
     Press Numpad 6 to Exit.\n"
     );
-    tokio::spawn(key5());
-    tokio::spawn(looping());
-    //looping().await;
+    
+    looping().await;
     
 }
