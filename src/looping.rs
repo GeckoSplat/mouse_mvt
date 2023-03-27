@@ -1,12 +1,13 @@
 use crate::jiggle_mouse::jiggle_mouse;
 use device_query::keymap::Keycode;
 use device_query::{DeviceQuery, DeviceState};
+use std::time::{Duration, Instant};
 use std::sync::mpsc;
 use std::thread;
-use std::time::{Duration, Instant};
 
 pub fn looping() {
     'outerL: loop {
+        
         let (sender, receiver) = mpsc::channel::<String>();
         let mut jiggle_counter = 1;
         let device_state = DeviceState::new();
@@ -20,18 +21,20 @@ pub fn looping() {
         if keys.contains(&Keycode::Numpad4) {
             let now = Instant::now();
             println!("\nJiggler running, timer started :\n");
-
+            
             'inner: loop {
+                
                 println!("jiggle loop is looping...");
+                
                 loop {
+                    
                     let device_state = DeviceState::new();
                     let exit_key: Vec<Keycode> = device_state.get_keys();
                     let sender2 = sender.clone();
 
                     thread::spawn(move || {
                         let msg = format!("you caught me !");
-
-                        sender2.send(msg).expect("arrrgg!, sender gone wrong");
+                        sender2.send(msg).expect("arrrgg!, sender gone wrong"); 
                         drop(sender2);
                     });
                     thread::sleep(Duration::from_secs(1));
@@ -47,7 +50,6 @@ pub fn looping() {
 
                     while let Ok(msg) = receiver.recv() {
                         println!("thread active {msg:?}");
-
                         jiggle_mouse();
                         println!("\njiggled {} times.\n", jiggle_counter);
                         jiggle_counter += 1;
