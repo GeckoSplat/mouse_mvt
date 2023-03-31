@@ -1,6 +1,6 @@
-use crate::run::run;
 mod jiggle_mouse;
 mod run;
+use run::run;
 
 fn main() {
     println!(
