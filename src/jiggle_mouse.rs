@@ -1,5 +1,4 @@
-use mouse_rs::types::Point;
-use mouse_rs::Mouse;
+use mouse_rs::{types::Point, Mouse};
 use std::{thread, time::Duration};
 
 pub fn jiggle_mouse() {
