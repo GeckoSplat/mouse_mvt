@@ -6,7 +6,7 @@ use std::sync::mpsc;
 use std::thread;
 
 pub fn run() {
-    'outerL: loop {
+    'outer: loop {
         
         let (sender, receiver) = mpsc::channel::<String>();
         let mut jiggle_counter = 1;
@@ -44,7 +44,7 @@ pub fn run() {
                             "\nI jiggled for {} seconds !\nPaused jiggling.\n\nRunning in background....",
                             elapsed_time.as_secs()
                         );
-                        continue 'outerL;
+                        continue 'outer;
                     }
 
                     while let Ok(_msg) = receiver.recv() {
