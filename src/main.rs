@@ -1,6 +1,6 @@
 use crate::looping::looping;
-pub mod jiggle_mouse;
-pub mod looping;
+mod jiggle_mouse;
+mod looping;
 
 fn main() {
     println!(

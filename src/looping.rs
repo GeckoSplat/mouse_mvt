@@ -47,8 +47,8 @@ pub fn looping() {
                         continue 'outerL;
                     }
 
-                    while let Ok(msg) = receiver.recv() {
-                        println!("thread active {msg:?}");
+                    while let Ok(_msg) = receiver.recv() {
+                        //println!("thread active {msg:?}");
                         jiggle_mouse();
                         println!("\njiggled {} times.\n", jiggle_counter);
                         jiggle_counter += 1;
