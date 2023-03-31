@@ -1,6 +1,6 @@
-use crate::looping::looping;
+use crate::run::run;
 mod jiggle_mouse;
-mod looping;
+mod run;
 
 fn main() {
     println!(
@@ -10,5 +10,5 @@ fn main() {
     Press Numpad 6 to Exit.\n"
     );
 
-    looping();
+    run();
 }

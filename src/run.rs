@@ -5,7 +5,7 @@ use std::time::Instant;
 use std::sync::mpsc;
 use std::thread;
 
-pub fn looping() {
+pub fn run() {
     'outerL: loop {
         
         let (sender, receiver) = mpsc::channel::<String>();
