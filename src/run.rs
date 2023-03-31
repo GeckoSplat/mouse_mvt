@@ -19,7 +19,6 @@ pub fn run() {
             println!("\nJiggler running, timer started :\n");
 
             'inner: loop {
-                println!("jiggle loop is looping...");
 
                 loop {
                     let device_state = DeviceState::new();
@@ -44,7 +43,7 @@ pub fn run() {
                     while let Ok(_msg) = receiver.recv() {
                         //println!("thread active {msg:?}");
                         jiggle_mouse();
-                        println!("\njiggled {} times.\n", jiggle_counter);
+                        println!("\njiggled {} times..jiggler running.....\n", jiggle_counter);
                         jiggle_counter += 1;
 
                         continue 'inner;
