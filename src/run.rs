@@ -18,36 +18,30 @@ pub fn run() {
             let now = Instant::now();
             println!("\nJiggler running, timer started :\n");
 
-            'inner: loop {
+            loop {
+                let device_state = DeviceState::new();
+                let exit_key: Vec<Keycode> = device_state.get_keys();
+                let sender2 = sender.clone();
 
-                loop {
-                    let device_state = DeviceState::new();
-                    let exit_key: Vec<Keycode> = device_state.get_keys();
-                    let sender2 = sender.clone();
+                thread::spawn(move || {
+                    if sender2.send("you caught me !".to_string()).is_ok() {
+                        drop(sender2)
+                    };
+                });
 
-                    thread::spawn(move || {
-                        let msg = format!("you caught me !");
-                        sender2.send(msg).expect("arrrgg!, sender gone wrong");
-                        drop(sender2);
-                    });
-
-                    if exit_key.contains(&Keycode::Numpad5) {
-                        let elapsed_time = now.elapsed();
-                        println!(
+                if exit_key.contains(&Keycode::Numpad5) {
+                    let elapsed_time = now.elapsed();
+                    println!(
                             "\nI jiggled for {} seconds !\nPaused jiggling.\n\nRunning in background....",
                             elapsed_time.as_secs()
                         );
-                        continue 'outer;
-                    }
+                    continue 'outer;
+                }
 
-                    while let Ok(_msg) = receiver.recv() {
-                        //println!("thread active {msg:?}");
-                        jiggle_mouse();
-                        println!("\njiggled {} times..jiggler running.....\n", jiggle_counter);
-                        jiggle_counter += 1;
-
-                        continue 'inner;
-                    }
+                if receiver.recv().is_ok() {
+                    jiggle_mouse();
+                    println!("\njiggled {} times..jiggler running.....\n", jiggle_counter);
+                    jiggle_counter += 1;
                 }
             }
         }

@@ -8,7 +8,7 @@ pub fn jiggle_mouse() {
     // amount of movement set here in pixels
     let first_position = mouse.get_position().unwrap();
     let second_position = Point {
-        x: first_position.x + 0,
+        x: first_position.x,
         y: first_position.y + 1,
     };
     //wait between movements
